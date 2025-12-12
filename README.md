@@ -7,6 +7,8 @@ Minimal viable product for searching automotive images using simple text queries
 ```bash
 npm install
 npm run dev
+npm run build
+npm run start
 ```
 
 - Next.js runs on http://localhost:3000
@@ -21,23 +23,30 @@ npm run dev
 - Keyword-based search returning the top 10 matches with similarity scores
 - Metadata and embeddings stored in SQLite with local image storage
 
-## Project layout
+## Architecture
 
-```
+Frontend (Next.js)
 pages/
-  index.js          # Search UI
-  admin.js          # Upload and tagging UI
-  api/
-    search.js       # Proxies search to Express
-    upload.js       # Proxies uploads to Express
-    images.js       # Proxies metadata listing to Express
+├── index.js # Search interface
+├── admin.js # Upload and tag images
+└── api/
+    ├── search.js # Search endpoint
+    ├── upload.js # Image upload
+    └── images.js # Image metadata
+
+Backend (Node.js)
 src/
-  app.js            # Express server
-  routes/           # Upload, search, metadata endpoints
-  services/         # Embedding, tagging, and file helpers
-  models/           # SQLite model setup
-storage/images      # Uploaded images
-```
+├── app.js # Express server
+├── routes/
+│   ├── search.js # Search logic
+│   ├── upload.js # Image processing
+│   └── images.js # Image metadata
+├── services/
+│   ├── clipService.js # CLIP embedding generation
+│   ├── tagService.js # Automatic tag extraction
+│   └── imageService.js # Image processing
+└── models/
+    └── Image.js # Image metadata model
 
 ## Notes
 

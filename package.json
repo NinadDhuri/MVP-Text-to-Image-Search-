@@ -7,7 +7,7 @@
     "dev:server": "node src/app.js",
     "dev:next": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production node src/app.js"
+    "start": "concurrently \"NODE_ENV=production node src/app.js\" \"next start\""
   },
   "dependencies": {
     "axios": "^1.6.8",
